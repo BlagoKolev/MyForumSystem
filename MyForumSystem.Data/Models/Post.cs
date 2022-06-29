@@ -33,7 +33,7 @@ namespace MyForumSystem.Data.Models
 
         [Required]
         public string? CreatorId { get; set; }
-        public string? CreatorName { get; set; }
+        public IdentityUser? Creator { get; set; }
 
         [Required]
         public int? CategoryId { get; set; }

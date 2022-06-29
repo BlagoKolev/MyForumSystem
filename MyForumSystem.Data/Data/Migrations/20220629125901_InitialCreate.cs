@@ -35,8 +35,7 @@ namespace MyForumSystem.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Contents = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
-                    CreatorId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -45,6 +44,12 @@ namespace MyForumSystem.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Post", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Post_AspNetUsers_CreatorId",
+                        column: x => x.CreatorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Post_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -60,8 +65,7 @@ namespace MyForumSystem.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Contents = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CreatorId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PostId = table.Column<int>(type: "int", nullable: false),
                     ParrentId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -71,6 +75,12 @@ namespace MyForumSystem.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_CreatorId",
+                        column: x => x.CreatorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comments_Comments_ParrentId",
                         column: x => x.ParrentId,
@@ -117,6 +127,11 @@ namespace MyForumSystem.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_CreatorId",
+                table: "Comments",
+                column: "CreatorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_ParrentId",
                 table: "Comments",
                 column: "ParrentId");
@@ -130,6 +145,11 @@ namespace MyForumSystem.Data.Migrations
                 name: "IX_Post_CategoryId",
                 table: "Post",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Post_CreatorId",
+                table: "Post",
+                column: "CreatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vote_CommentId",

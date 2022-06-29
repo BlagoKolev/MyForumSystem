@@ -23,11 +23,11 @@ namespace MyForumSystem.Data.Models
 
         [Required]
         public string? CreatorId { get; set; }
-        public string? CreatorName { get; set; }
+        public IdentityUser Creator { get; set; }
 
         [Required]
         public int PostId { get; set; }
-        public virtual Post? Post { get; set; }
+        public virtual Post Post { get; set; }
         public int? ParrentId { get; set; }
         public virtual Comment? Parrent { get; set; }
         public bool IsDeleted { get; set; }

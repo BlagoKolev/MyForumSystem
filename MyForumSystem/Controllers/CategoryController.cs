@@ -9,7 +9,7 @@ namespace MyForumSystem.Controllers
 
         }
 
-        public IActionResult AllPosts(string categoryName)
+        public IActionResult AllPosts(int categoryId)
         {
             return this.View(); 
         }

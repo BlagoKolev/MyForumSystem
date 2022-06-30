@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using MyForumSystem.Data;
 using MyForumSystem.Data.Models;
 
@@ -12,6 +13,7 @@ namespace MyForumSystem.Infrastructure
             var services = serviceScope.ServiceProvider;
 
             MigrateDatabase(services);
+            SeedAdmin(services);
             SeedCategories(services);
 
             return app;
@@ -23,6 +25,35 @@ namespace MyForumSystem.Infrastructure
             db.Database.Migrate();
         }
 
+        private static async Task<IdentityResult> SeedAdmin(IServiceProvider services)
+        {
+            var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+            var result = new IdentityResult();
+
+            if (await roleManager.RoleExistsAsync("Admin"))
+            {
+                return result;
+            }
+
+            var role = new IdentityRole("Admin");
+
+            await roleManager.CreateAsync(role);
+
+            var adminEmail = "admin@forum.com";
+            var adminPassword = "admin";
+
+            var adminUser = new IdentityUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail
+            };
+
+            var a = await userManager.CreateAsync(adminUser, adminPassword);
+            result = await userManager.AddToRoleAsync(adminUser, role.Name);
+            return result;
+
+        }
         private static void SeedCategories(IServiceProvider services)
         {
 

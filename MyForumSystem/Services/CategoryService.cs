@@ -27,5 +27,10 @@ namespace MyForumSystem.Services
                 .ToList();
             return categories;
         }
+
+        public CategoryAllPostViewModel GetAllPosts(int categoryId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

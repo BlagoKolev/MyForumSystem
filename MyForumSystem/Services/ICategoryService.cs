@@ -6,5 +6,6 @@ namespace MyForumSystem.Services
     public interface ICategoryService
     {
         ICollection<CategoryIndexViewModel> GetAllCategories();
+        CategoryAllPostViewModel GetAllPosts(int categoryId);
     }
 }

@@ -49,7 +49,7 @@ namespace MyForumSystem.Infrastructure
                 Email = adminEmail
             };
 
-            var a = await userManager.CreateAsync(adminUser, adminPassword);
+            await userManager.CreateAsync(adminUser, adminPassword);
             result = await userManager.AddToRoleAsync(adminUser, role.Name);
             return result;
 

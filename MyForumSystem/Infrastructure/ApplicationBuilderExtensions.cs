@@ -61,7 +61,7 @@ namespace MyForumSystem.Infrastructure
             {
                 Name = "Computers and Programming",
                 Description = "Here you can discuss all about high technologies.",
-                Image = "https://image.shutterstock.com/image-photo/businessman-using-mobile-smart-phone-600w-1932042689.jpg",
+                Image = "https://image.shutterstock.com/image-vector/professional-programmer-writing-code-testing-600w-1926705251.jpg",
                 CreatedOn = DateTime.UtcNow,
             };
 
@@ -69,7 +69,7 @@ namespace MyForumSystem.Infrastructure
             {
                 Name = "Lifestyle",
                 Description = "Here you can discuss all about lifestyle.",
-                Image = "https://image.shutterstock.com/image-vector/healthy-lifestyle-banner-design-template-600w-650261107.jpg",
+                Image = "https://image.shutterstock.com/image-vector/bundle-sixteen-healthy-lifestyle-set-600w-1922836826.jpg",
                 CreatedOn = DateTime.UtcNow,
             };
 
@@ -101,7 +101,7 @@ namespace MyForumSystem.Infrastructure
             {
                 Name = "Gardening",
                 Description = "Here you can discuss all about gardening.",
-                Image = "https://image.shutterstock.com/image-photo/spring-colored-primroses-flowers-ready-600w-1909405708.jpg",
+                Image = "https://image.shutterstock.com/image-photo/gardening-tools-watering-can-seeds-600w-175282622.jpg",
                 CreatedOn = DateTime.UtcNow,
             };
 
@@ -109,7 +109,7 @@ namespace MyForumSystem.Infrastructure
             {
                 Name = "Vehicles",
                 Description = "Here you can discuss all about vehicles and racing.",
-                Image = "https://image.shutterstock.com/image-vector/finishing-flags-flat-vector-icon-600w-1044104527.jpg",
+                Image = "https://image.shutterstock.com/image-vector/electric-car-charging-station-front-600w-1864450102.jpg",
                 CreatedOn = DateTime.UtcNow,
             };
 
@@ -117,7 +117,7 @@ namespace MyForumSystem.Infrastructure
             {
                 Name = "Gaming",
                 Description = "Here you can discuss all about gaming.",
-                Image = "https://image.shutterstock.com/image-vector/guards-character-squid-game-signs-600w-2080518121.jpg",
+                Image = "https://image.shutterstock.com/image-vector/vector-illustration-word-game-over-600w-1230400006.jpg",
                 CreatedOn = DateTime.UtcNow,
             };
 
@@ -125,7 +125,7 @@ namespace MyForumSystem.Infrastructure
             {
                 Name = "Pets",
                 Description = "Here you can discuss all about pets.",
-                Image = "https://image.shutterstock.com/image-photo/dog-cat-under-plaid-pet-600w-726710023.jpg",
+                Image = "https://image.shutterstock.com/image-photo/group-pets-posing-around-border-600w-1762836920.jpg",
                 CreatedOn = DateTime.UtcNow,
             };
 

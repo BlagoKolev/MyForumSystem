@@ -21,7 +21,8 @@ namespace MyForumSystem.Services
                     Id = x.Id,
                     Name = x.Name,
                     Description = x.Description,
-                    Image = x.Image
+                    Image = x.Image,
+                    CreatedOn = x.CreatedOn,
                 })
                 .ToList();
             return categories;

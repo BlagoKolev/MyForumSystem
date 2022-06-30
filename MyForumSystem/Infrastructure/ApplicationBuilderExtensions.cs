@@ -25,7 +25,13 @@ namespace MyForumSystem.Infrastructure
 
         private static void SeedCategories(IServiceProvider services)
         {
+
             var db = services.GetRequiredService<MyForumDbContext>();
+
+            if (db.Categories.Any())
+            {
+                return;
+            }
 
             var sportCategory = new Category
             {

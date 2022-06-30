@@ -1,21 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyForumSystem.Models;
+using MyForumSystem.Services;
 using System.Diagnostics;
 
 namespace MyForumSystem.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ICategoryService categoryService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICategoryService categoryService)
         {
-            _logger = logger;
+            this.categoryService = categoryService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var categories = categoryService.GetAllCategories();
+            return View(categories);
         }
 
         public IActionResult Privacy()

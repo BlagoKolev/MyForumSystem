@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyForumSystem.Data;
 using MyForumSystem.Infrastructure;
+using MyForumSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<MyForumDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

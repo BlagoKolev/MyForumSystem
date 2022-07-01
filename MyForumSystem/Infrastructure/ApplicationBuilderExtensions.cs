@@ -7,27 +7,45 @@ namespace MyForumSystem.Infrastructure
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder PrepareDatabase(this IApplicationBuilder app)
+        public static async Task<IApplicationBuilder> PrepareDatabase(this IApplicationBuilder app)
         {
             var serviceScope = app.ApplicationServices.CreateScope();
             var services = serviceScope.ServiceProvider;
 
             MigrateDatabase(services);
-            SeedAdmin(services);
+            await SeedAdmin(services);
+            CreateUsers(services);
             SeedCategories(services);
+            SeedPosts(services);
 
             return app;
         }
 
+        private static UserManager<IdentityUser> GetUserManager(IServiceProvider services)
+        {
+            return services.GetRequiredService<UserManager<IdentityUser>>();
+        }
+
+        private static void CreateUsers(IServiceProvider services)
+        {
+            var userManager = GetUserManager(services);
+
+            var testUser = new IdentityUser
+            {
+                UserName = "testUser@mail.com",
+                Email = "testUser@mail.com"
+            };
+
+            userManager.CreateAsync(testUser, "123456").GetAwaiter().GetResult();
+        }
         private static void MigrateDatabase(IServiceProvider services)
         {
             var db = services.GetRequiredService<MyForumDbContext>();
             db.Database.Migrate();
         }
-
         private static async Task<IdentityResult> SeedAdmin(IServiceProvider services)
         {
-            var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            var userManager = GetUserManager(services);
             var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
             var result = new IdentityResult();
 
@@ -52,7 +70,6 @@ namespace MyForumSystem.Infrastructure
             await userManager.CreateAsync(adminUser, adminPassword);
             result = await userManager.AddToRoleAsync(adminUser, role.Name);
             return result;
-
         }
         private static void SeedCategories(IServiceProvider services)
         {
@@ -176,8 +193,61 @@ namespace MyForumSystem.Infrastructure
                 petsCategory
             };
 
-            db.AddRange(categories);
-            db.SaveChanges();
+            db.AddRangeAsync(categories).GetAwaiter().GetResult();
+            db.SaveChangesAsync().GetAwaiter().GetResult();
+        }
+        private static void SeedPosts(IServiceProvider services)
+        {
+            var db = services.GetRequiredService<MyForumDbContext>();
+            var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            var user = userManager.FindByEmailAsync("testUser@mail.com").GetAwaiter().GetResult();
+
+            if (db.Posts.Any())
+            {
+                return;
+            }
+            
+            //Posts to Sport category
+
+            var firstSportPost = new Post
+            {
+                Title = "Football",
+                Contents = "Who is your favourite football team?",
+                CreatorId = user.Id,
+                CategoryId = 1,
+                CreatedOn = DateTime.UtcNow,
+            };
+
+            var secondSportPost = new Post
+            {
+                Title = "Formula 1",
+                Contents = "Who is your favourite Formula 1 team?",
+                CreatorId = user.Id,
+                CategoryId = 1,
+                CreatedOn = DateTime.UtcNow,
+            };
+
+            var thirdSportPost = new Post
+            {
+                Title = "Formula 1",
+                Contents = "Who is your favourite Formula 1 driver?",
+                CreatorId = user.Id,
+                CategoryId = 1,
+                CreatedOn = DateTime.UtcNow,
+            };
+
+            var fourthSportPost = new Post
+            {
+                Title = "Tennis",
+                Contents = "Who is your favourite tennis player?",
+                CreatorId = user.Id,
+                CategoryId = 1,
+                CreatedOn = DateTime.UtcNow,
+            };
+
+            var posts = new List<Post>() { firstSportPost,secondSportPost,thirdSportPost,fourthSportPost};
+            db.AddRangeAsync(posts).GetAwaiter().GetResult();
+            db.SaveChangesAsync().GetAwaiter().GetResult();
         }
     }
 }

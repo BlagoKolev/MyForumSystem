@@ -17,14 +17,11 @@ namespace MyForumSystem.Infrastructure
             CreateUsers(services);
             SeedCategories(services);
             SeedPosts(services);
+            SeedComments(services); 
 
             return app;
         }
 
-        private static UserManager<IdentityUser> GetUserManager(IServiceProvider services)
-        {
-            return services.GetRequiredService<UserManager<IdentityUser>>();
-        }
 
         private static void CreateUsers(IServiceProvider services)
         {
@@ -40,7 +37,7 @@ namespace MyForumSystem.Infrastructure
         }
         private static void MigrateDatabase(IServiceProvider services)
         {
-            var db = services.GetRequiredService<MyForumDbContext>();
+            var db = GetDbContext(services);
             db.Database.Migrate();
         }
         private static async Task<IdentityResult> SeedAdmin(IServiceProvider services)
@@ -74,7 +71,7 @@ namespace MyForumSystem.Infrastructure
         private static void SeedCategories(IServiceProvider services)
         {
 
-            var db = services.GetRequiredService<MyForumDbContext>();
+            var db = GetDbContext(services);
 
             if (db.Categories.Any())
             {
@@ -198,7 +195,7 @@ namespace MyForumSystem.Infrastructure
         }
         private static void SeedPosts(IServiceProvider services)
         {
-            var db = services.GetRequiredService<MyForumDbContext>();
+            var db = GetDbContext(services);
             var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
             var user = userManager.FindByEmailAsync("testUser@mail.com").GetAwaiter().GetResult();
 
@@ -206,7 +203,7 @@ namespace MyForumSystem.Infrastructure
             {
                 return;
             }
-            
+
             //Posts to Sport category
 
             var firstSportPost = new Post
@@ -245,9 +242,93 @@ namespace MyForumSystem.Infrastructure
                 CreatedOn = DateTime.UtcNow,
             };
 
-            var posts = new List<Post>() { firstSportPost,secondSportPost,thirdSportPost,fourthSportPost};
+            var posts = new List<Post>() { firstSportPost, secondSportPost, thirdSportPost, fourthSportPost };
             db.AddRangeAsync(posts).GetAwaiter().GetResult();
             db.SaveChangesAsync().GetAwaiter().GetResult();
+        }
+        private static void SeedComments(IServiceProvider services)
+        {
+            var db = GetDbContext(services);
+            var userManager = GetUserManager(services);
+            var user = userManager.FindByEmailAsync("testUser@mail.com").GetAwaiter().GetResult();
+
+            if (db.Comments.Any())
+            {
+                return;
+            }
+
+            //Comments to category Sport
+            var firstSportComment = new Comment
+            {
+                Contents = "Manchester United",
+                Creator = user,
+                CreatorId = user.Id,
+                Parrent = null,
+                ParrentId = null,
+                PostId = 1,
+                CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow,
+            };
+            var secondSportComment = new Comment
+            {
+                Contents = "Juventus",
+                Creator = user,
+                CreatorId = user.Id,
+                Parrent = null,
+                ParrentId = null,
+                PostId = 1,
+                CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow,
+            };
+            var thirdSportComment = new Comment
+            {
+                Contents = "Chelsea",
+                Creator = user,
+                CreatorId = user.Id,
+                Parrent = null,
+                ParrentId = null,
+                PostId = 1,
+                CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow,
+            };
+
+            //Comments to comments of category Sport
+
+            var firstUnderSportComment = new Comment
+            {
+                Contents = "Yes they are great.",
+                Creator = user,
+                CreatorId = user.Id,
+                Parrent = firstSportComment,
+                ParrentId = 1,
+                PostId = 1,
+                CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow,
+            };
+            var secondUnderSportComment = new Comment
+            {
+                Contents = "I think they are the best in Premier League.",
+                Creator = user,
+                CreatorId = user.Id,
+                Parrent = firstSportComment,
+                ParrentId = 1,
+                PostId = 1,
+                CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow,
+            };
+
+            var comments = new List<Comment> { firstSportComment, secondSportComment, thirdSportComment,firstUnderSportComment, secondUnderSportComment };
+
+            db.Comments.AddRangeAsync(comments).GetAwaiter().GetResult();
+            db.SaveChangesAsync().GetAwaiter().GetResult();
+        }
+        private static UserManager<IdentityUser> GetUserManager(IServiceProvider services)
+        {
+            return services.GetRequiredService<UserManager<IdentityUser>>();
+        }
+        private static MyForumDbContext GetDbContext(IServiceProvider services)
+        {
+            return services.GetRequiredService<MyForumDbContext>();
         }
     }
 }

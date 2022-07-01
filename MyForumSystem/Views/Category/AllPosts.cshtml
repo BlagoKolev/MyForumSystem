@@ -10,7 +10,7 @@
         <div class="card-body">
             <h5 class="card-title">@post.Title</h5>
             <p class="card-text">@post.Contents</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a class="btn btn-primary" asp-controller="Post" asp-action="ById" asp-route-postId="@post.Id">Read this post</a>
         </div>
     </div>
 

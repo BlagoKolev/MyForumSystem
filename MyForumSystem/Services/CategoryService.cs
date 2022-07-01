@@ -30,7 +30,27 @@ namespace MyForumSystem.Services
 
         public CategoryAllPostViewModel GetAllPosts(int categoryId)
         {
-            throw new NotImplementedException();
+            var posts = db.Posts
+                 .Where(x => !x.IsDeleted && x.CategoryId == categoryId)
+                 .Select(x => new CategoryPostViewModel
+                 {
+                     Id = x.Id,
+                     Title = x.Title,
+                     Contents = x.Contents,
+                     CreatorId = x.CreatorId,
+                     CategoryId = categoryId,
+                     CategoryName = x.Category.Name,
+                     CreatedOn = x.CreatedOn,
+                     ModifiedOn = x.ModifiedOn,
+                 })
+                 .ToList();
+
+            var postsList = new CategoryAllPostViewModel
+            {
+                Posts = posts,
+            };
+
+            return postsList;
         }
     }
 }

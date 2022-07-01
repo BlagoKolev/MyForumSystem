@@ -1,17 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyForumSystem.Services;
 
 namespace MyForumSystem.Controllers
 {
     public class CategoryController : Controller
     {
-        public CategoryController()
-        {
+        private readonly ICategoryService categoryService;
 
+        public CategoryController(ICategoryService categoryService)
+        {
+            this.categoryService = categoryService;
         }
 
-        public IActionResult AllPosts(int categoryId)
+        public IActionResult AllPosts(int categoryId, string categoryName)
         {
-            return this.View(); 
+            var posts = categoryService.GetAllPosts(categoryId);
+
+            if (posts == null)
+            {
+                return NotFound();
+            }
+            ViewData["categoryName"] = categoryName;
+            return this.View(posts); 
         }
     }
 }

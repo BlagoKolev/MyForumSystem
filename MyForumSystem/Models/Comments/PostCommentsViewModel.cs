@@ -1,15 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static MyForumSystem.Data.GlobalConstants;
+﻿using Ganss.XSS;
+using Microsoft.AspNetCore.Identity;
+
 namespace MyForumSystem.Models.Comments
 {
-    public class CreateCommentInputModel
+    public class PostCommentsViewModel
     {
-        [Required]
-        [MinLength(ContentsMinLength, ErrorMessage = FieldMinLength)]
-        [MaxLength(ContentsMaxLength, ErrorMessage = FieldMaxLength)]
+        public int Id { get; set; }
         public string? Contents { get; set; }
-        public string? SanitizedContents { get; set; }
+        public string? SanitizedContents => new HtmlSanitizer().Sanitize(this.Contents);
         public string? CreatorId { get; set; }
+        public IdentityUser Creator { get; set; }
         public int PostId { get; set; }
         public int? ParrentId { get; set; }
         public bool IsDeleted { get; set; }

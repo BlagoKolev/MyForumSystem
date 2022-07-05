@@ -1,6 +1,7 @@
 ﻿using MyForumSystem.Data;
 using MyForumSystem.Data.Models;
 using MyForumSystem.Models.Posts;
+using MyForumSystem.Models.Comments;
 
 namespace MyForumSystem.Services
 {
@@ -46,7 +47,16 @@ namespace MyForumSystem.Services
                     Creator = db.Users.Where(a => a.Id == x.CreatorId).FirstOrDefault(),
                     CreatedOn = x.CreatedOn,
                     ModifiedOn = x.ModifiedOn,
-                    Comments = x.Comments,
+                    Comments = x.Comments.Select(x => new PostCommentsViewModel
+                    {
+                        Id = x.Id,
+                        CreatorId = x.CreatorId,
+                        Contents = x.Contents,
+                        ModifiedOn = x.ModifiedOn,
+                        ParrentId = x.ParrentId,
+                        CreatedOn = x.CreatedOn,
+                        PostId = x.PostId
+                    }).ToList(),
                 })
                 .FirstOrDefault();
             return post;

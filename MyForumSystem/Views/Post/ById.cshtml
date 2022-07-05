@@ -10,10 +10,10 @@
         {
             <div class="card mb-3 mt-3 mx-3">
                 <div class="card-header">
-                    Reply from: @comment.Creator.UserName
+                    //Reply from:/* @comment.Creator.UserName*/
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">@comment.Contents</h5>
+                    <h5 class="card-title">@Html.Raw(comment.SanitizedContents)</h5>
                     <p class="card-text">Created on: @comment.CreatedOn</p>
                     <p class="card-text">Last modified: @comment.ModifiedOn</p>
                     <a class="btn btn-primary" onclick="ShowAddCommentForm(@comment.Id)"><i class="fa-solid fa-comment-dots"></i></a>
@@ -29,7 +29,7 @@
     <div class="card ">
         <h5 class="card-header">@Model.Title</h5>
         <div class="card-body">
-            <h5 class="card-title">@Html.Raw(Model.Contents)</h5>
+            <h5 class="card-title">@Html.Raw(Model.SanitizedContents)</h5>
             <p class="card-text">Created on: @Model.CreatedOn</p>
             <p class="card-text">Last modified: @Model.ModifiedOn</p>
             <a class="btn btn-primary" onclick="ShowAddCommentForm(0)"><i class="fa-solid fa-comment-dots"></i></a>

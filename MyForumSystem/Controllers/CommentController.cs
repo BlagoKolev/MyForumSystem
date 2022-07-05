@@ -1,27 +1,41 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyForumSystem.Models.Comments;
+using MyForumSystem.Models.Posts;
+using MyForumSystem.Services;
 
 namespace MyForumSystem.Controllers
 {
     public class CommentController : Controller
     {
-        [HttpGet]
-        [Authorize]
-        public IActionResult Create()
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly ICommentService commentService;
+
+        public CommentController(UserManager<IdentityUser> userManager, ICommentService commentService)
         {
-            return View();
+            this.userManager = userManager;
+            this.commentService = commentService;
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(int Id, int parrentId, CreateCommentViewModel postModel)
+        public async Task<IActionResult> Create(CreateCommentInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
-                return Redirect($"/Post/ById?postId={Id}");
+                return Redirect($"/Post/ById?postId={inputModel.PostId}");
             }
-            return this.View();
+
+            var userId = GetUserId();
+            await commentService.Create(userId, inputModel);
+
+            return Redirect($"/Post/ById?postId={inputModel.PostId}");
+        }
+
+        private string GetUserId()
+        {
+            return userManager.GetUserId(this.User);
         }
     }
 }

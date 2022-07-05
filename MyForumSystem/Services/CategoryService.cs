@@ -43,6 +43,7 @@ namespace MyForumSystem.Services
                      CreatedOn = x.CreatedOn,
                      ModifiedOn = x.ModifiedOn,
                  })
+                 .OrderByDescending(x=>x.CreatedOn)
                  .ToList();
 
             var postsList = new CategoryAllPostViewModel

@@ -37,9 +37,9 @@
 
             <form method="Post" asp-controller="Comment" asp-action="Create">
                 <div class="mb-4">
-                    <label asp-for="Contents" class="form-label">Write Comment</label>
-                    <textarea class="form-control" id="write-comment" asp-for="@Model.CreateComment.Contents" rows="4" placeholder="Type your comment here..."></textarea>
-                    <input type="hidden" asp-for="Id" value="@Model.Id" />
+                    <label for="Contents" class="form-label">Write Comment</label>
+                    <textarea class="form-control" name="Contents" id="Contents" rows="4" placeholder="Type your comment here..."></textarea>
+                    <input type="hidden" name="postId" value="@Model.Id" />
                     <input class="btn btn-success mt-2" type="submit" value="Create" />
                 </div>
             </form>

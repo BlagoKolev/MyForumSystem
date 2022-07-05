@@ -51,9 +51,9 @@ namespace MyForumSystem.Controllers
             }
 
             var userId = GetUserId();
-            var postId = postService.CreatePost(inputModel, userId);
+            var postId = await postService.CreatePost(inputModel, userId);
 
-            return RedirectToAction(nameof(ById), new { postId = postId });
+            return RedirectToAction(nameof(ById), new { postId });
         }
 
         private string GetUserId()

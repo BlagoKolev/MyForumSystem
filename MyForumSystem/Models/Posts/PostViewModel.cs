@@ -19,7 +19,6 @@ namespace MyForumSystem.Models.Posts
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
         public ICollection<Comment> Comments { get; set; }
-        public CreateCommentViewModel? CreateComment { get; set; }
 
     }
 }

@@ -28,7 +28,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     .AddEntityFrameworkStores<MyForumDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
-builder.Services.AddTransient<IPostService, PostService>(); 
+builder.Services.AddTransient<IPostService, PostService>();
+builder.Services.AddTransient<ICommentService, CommentService>();
 
 var app = builder.Build();
 

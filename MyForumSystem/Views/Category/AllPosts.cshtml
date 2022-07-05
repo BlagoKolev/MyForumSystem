@@ -10,7 +10,7 @@
         <h5 class="card-header">@post.CategoryName</h5>
         <div class="card-body">
             <h5 class="card-title">@post.Title</h5>
-            <p class="card-text">@post.Contents</p>
+            <p class="card-text">@Html.Raw(post.Contents)</p>
             <a class="btn btn-primary" asp-controller="Post" asp-action="ById" asp-route-postId="@post.Id">Read this post</a>
         </div>
     </div>

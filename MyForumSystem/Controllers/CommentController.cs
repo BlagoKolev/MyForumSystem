@@ -27,6 +27,7 @@ namespace MyForumSystem.Controllers
                 return Redirect($"/Post/ById?postId={inputModel.PostId}");
             }
 
+            inputModel.ParrentId = inputModel.ParrentId == 0 ? null : inputModel.ParrentId;
             var userId = GetUserId();
             await commentService.Create(userId, inputModel);
 

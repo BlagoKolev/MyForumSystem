@@ -13,6 +13,7 @@ namespace MyForumSystem.Models.Posts
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? Contents { get; set; }
+        public string? SanitizedContents { get; set; }
         public int? CategoryId { get; set; }
         public string? CreatorId { get; set; }
         public IdentityUser? Creator { get; set; }

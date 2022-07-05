@@ -29,7 +29,7 @@
     <div class="card ">
         <h5 class="card-header">@Model.Title</h5>
         <div class="card-body">
-            <h5 class="card-title">@Model.Contents</h5>
+            <h5 class="card-title">@Html.Raw(Model.Contents)</h5>
             <p class="card-text">Created on: @Model.CreatedOn</p>
             <p class="card-text">Last modified: @Model.ModifiedOn</p>
             <a class="btn btn-primary" onclick="ShowAddCommentForm(0)"><i class="fa-solid fa-comment-dots"></i></a>

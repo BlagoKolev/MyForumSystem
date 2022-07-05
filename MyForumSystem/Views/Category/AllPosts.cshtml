@@ -2,7 +2,8 @@
 @{
     this.ViewData["Title"] = ViewData["categoryName"];
 }
-
+<h2 class="text-center mb-4">Category @ViewData["categoryName"]</h2>
+<a class="btn btn-outline-success mb-4" asp-controller="Post" asp-action="Create" asp-route-categoryId="@Model.CategoryId">Write new post</a>
 @foreach (var post in Model.Posts)
 {
     <div class="card mb-3">

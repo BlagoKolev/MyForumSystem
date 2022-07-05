@@ -14,13 +14,13 @@ namespace MyForumSystem.Data.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = RequiredFieldWarning)]
-        [MinLength(TitleMinLength, ErrorMessage = FieldLengthWarning)]
-        [MaxLength(TitleMaxLength, ErrorMessage = FieldLengthWarning)]
+        [MinLength(TitleMinLength, ErrorMessage = FieldMinLength)]
+        [MaxLength(TitleMaxLength, ErrorMessage = FieldMaxLength)]
         public string? Name { get; set; }
 
         [Required(ErrorMessage = RequiredFieldWarning)]
-        [MinLength(TitleMinLength, ErrorMessage = FieldLengthWarning)]
-        [MaxLength(TitleMaxLength, ErrorMessage = FieldLengthWarning)]
+        [MinLength(TitleMinLength, ErrorMessage = FieldMinLength)]
+        [MaxLength(TitleMaxLength, ErrorMessage = FieldMaxLength)]
         public string? Description { get; set; }
         public string? Image { get; set; }
         public bool IsDeleted { get; set; }

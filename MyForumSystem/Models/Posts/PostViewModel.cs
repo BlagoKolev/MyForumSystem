@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MyForumSystem.Data.Models;
+using MyForumSystem.Models.Comments;
 
 namespace MyForumSystem.Models.Posts
 {
@@ -18,6 +19,7 @@ namespace MyForumSystem.Models.Posts
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public CreateCommentViewModel? CreateComment { get; set; }
 
     }
 }

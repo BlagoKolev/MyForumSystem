@@ -4,15 +4,11 @@
     void ShowComments(int? parrentId)
     {
         var comments = Model.Comments.Where(x => x.ParrentId == parrentId);
-
         if (!comments.Any())
-        {
-            return;
-        }
-
+        { return; }
         @foreach (var comment in comments)
         {
-            <div class="card mb-3 mt-3">
+            <div class="card mb-3 mt-3 mx-3">
                 <div class="card-header">
                     Reply from: @comment.Creator.UserName
                 </div>
@@ -30,14 +26,24 @@
     }
 }
 <div class="card mb-3">
-    <div class="card">
+    <div class="card ">
         <h5 class="card-header">@Model.Title</h5>
         <div class="card-body">
             <h5 class="card-title">@Model.Contents</h5>
             <p class="card-text">Created on: @Model.CreatedOn</p>
             <p class="card-text">Last modified: @Model.ModifiedOn</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="#" class="btn btn-primary"><i class="fa-solid fa-comment-dots"></i></a>
             <hr />
+
+            <form method="Post" asp-controller="Comment" asp-action="Create">
+                <div class="mb-4">
+                    <label asp-for="Contents" class="form-label">Write Comment</label>
+                    <textarea class="form-control" id="write-comment" asp-for="@Model.CreateComment.Contents" rows="4" placeholder="Type your comment here..."></textarea>
+                    <input type="hidden" asp-for="Id" value="@Model.Id" />
+                    <input class="btn btn-success mt-2" type="submit" value="Create" />
+                </div>
+            </form>
+
             @{
                 ShowComments(null);
             }
@@ -48,4 +54,5 @@
         <a href="#" class="card-link">Another link</a>
     </div>
 </div>
+
 

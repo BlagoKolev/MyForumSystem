@@ -22,13 +22,13 @@ namespace MyForumSystem.Data.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = RequiredFieldWarning)]
-        [MinLength(TitleMinLength, ErrorMessage = FieldLengthWarning)]
-        [MaxLength(TitleMaxLength, ErrorMessage = FieldLengthWarning)]
+        [MinLength(TitleMinLength, ErrorMessage = FieldMinLength)]
+        [MaxLength(TitleMaxLength, ErrorMessage = FieldMaxLength)]
         public string? Title { get; set; }
 
         [Required(ErrorMessage = RequiredFieldWarning)]
-        [MinLength(ContentMinLength, ErrorMessage = FieldLengthWarning)]
-        [MaxLength(ContentsMaxLength, ErrorMessage = FieldLengthWarning)]
+        [MinLength(ContentsMinLength, ErrorMessage = FieldMinLength)]
+        [MaxLength(ContentsMaxLength, ErrorMessage = FieldMaxLength)]
         public string? Contents { get; set; }
 
         [Required]

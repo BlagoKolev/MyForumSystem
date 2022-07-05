@@ -17,8 +17,8 @@ namespace MyForumSystem.Data.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = RequiredFieldWarning)]
-        [MinLength(TitleMinLength, ErrorMessage = FieldLengthWarning)]
-        [MaxLength(TitleMaxLength, ErrorMessage = FieldLengthWarning)]
+        [MinLength(TitleMinLength, ErrorMessage = FieldMinLength)]
+        [MaxLength(TitleMaxLength, ErrorMessage = FieldMaxLength)]
         public string? Contents { get; set; }
 
         [Required]

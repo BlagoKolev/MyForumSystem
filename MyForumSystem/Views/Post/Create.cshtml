@@ -1,0 +1,24 @@
+﻿@model CreatePostViewModel
+@{
+    this.ViewData["Title"] = "Create new post";
+}
+<h2 class="text-center">Create new post</h2>
+
+<form method="post" asp-controller="Post" asp-action="Create">
+  <div class="mb-3">
+    <label asp-for="Title" class="form-label">Title</label>
+    <input type="text" class="form-control" asp-for="Title"/>
+    <span asp-validation-for="Title" class="text-danger"></span>
+  </div>
+  <div class="mb-3">
+    <label asp-for="Contents" class="form-label">Contents</label>
+    <textarea asp-for="Contents" type="text" class="form-control" rows="4"> </textarea>
+    <span asp-validation-for="Contents" class="text-danger"></span>
+  </div>
+  <input asp-for="CategoryId" type="hidden" value="@Model.CategoryId" />
+  <button type="submit" class="btn btn-primary">Create post</button>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -20,6 +20,7 @@ namespace MyForumSystem.Controllers
             {
                 return NotFound();
             }
+            posts.CategoryId = categoryId;
             ViewData["categoryName"] = categoryName;
             return this.View(posts); 
         }

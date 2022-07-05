@@ -16,7 +16,7 @@
                     <h5 class="card-title">@comment.Contents</h5>
                     <p class="card-text">Created on: @comment.CreatedOn</p>
                     <p class="card-text">Last modified: @comment.ModifiedOn</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a class="btn btn-primary" onclick="ShowAddCommentForm(@comment.Id)"><i class="fa-solid fa-comment-dots"></i></a>
                     @{
                         ShowComments(comment.Id);
                     }
@@ -32,14 +32,15 @@
             <h5 class="card-title">@Model.Contents</h5>
             <p class="card-text">Created on: @Model.CreatedOn</p>
             <p class="card-text">Last modified: @Model.ModifiedOn</p>
-            <a href="#" class="btn btn-primary"><i class="fa-solid fa-comment-dots"></i></a>
+            <a class="btn btn-primary" onclick="ShowAddCommentForm(0)"><i class="fa-solid fa-comment-dots"></i></a>
             <hr />
 
-            <form method="Post" asp-controller="Comment" asp-action="Create">
+            <form method="Post" id="comment-form" asp-controller="Comment" asp-action="Create" style="display:none">
                 <div class="mb-4">
                     <label for="Contents" class="form-label">Write Comment</label>
                     <textarea class="form-control" name="Contents" id="Contents" rows="4" placeholder="Type your comment here..."></textarea>
                     <input type="hidden" name="postId" value="@Model.Id" />
+                    <input type="hidden" name="parrentId" value="0" />
                     <input class="btn btn-success mt-2" type="submit" value="Create" />
                 </div>
             </form>
@@ -55,4 +56,14 @@
     </div>
 </div>
 
-
+@section Scripts {
+<script>
+        function ShowAddCommentForm(parrentId){
+            $("#comment-form input[name='parrentId']").val(parrentId);
+            $("#comment-form").toggle();
+            $([document.documentElement, document.body]).animate({
+        scrollTop: $("#comment-form").offset().top
+    }, 300);
+      }
+</script>
+}

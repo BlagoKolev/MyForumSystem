@@ -51,12 +51,15 @@ namespace MyForumSystem.Services
                     {
                         Id = x.Id,
                         CreatorId = x.CreatorId,
+                        Creator = x.Creator,
                         Contents = x.Contents,
                         ModifiedOn = x.ModifiedOn,
                         ParrentId = x.ParrentId,
                         CreatedOn = x.CreatedOn,
                         PostId = x.PostId
-                    }).ToList(),
+                    })
+                    .OrderByDescending(x => x.CreatedOn)
+                    .ToList(),
                 })
                 .FirstOrDefault();
             return post;

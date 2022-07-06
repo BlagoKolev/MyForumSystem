@@ -2,6 +2,7 @@
 using MyForumSystem.Data.Models;
 using MyForumSystem.Models.Posts;
 using MyForumSystem.Models.Comments;
+using System.Globalization;
 
 namespace MyForumSystem.Services
 {
@@ -25,6 +26,7 @@ namespace MyForumSystem.Services
                 CategoryId = inputModel.CategoryId,
                 Category = this.db.Categories.Where(x => x.Id == inputModel.CategoryId).FirstOrDefault(),
                 CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow,
             };
 
             await this.db.Posts.AddAsync(newPost);
@@ -45,18 +47,18 @@ namespace MyForumSystem.Services
                     CategoryId = x.CategoryId,
                     CreatorId = x.CreatorId,
                     Creator = db.Users.Where(a => a.Id == x.CreatorId).FirstOrDefault(),
-                    CreatedOn = x.CreatedOn,
-                    ModifiedOn = x.ModifiedOn,
+                    CreatedOn = x.CreatedOn.ToLocalTime(),
+                    ModifiedOn = x.ModifiedOn.ToLocalTime(),
                     Comments = x.Comments.Select(x => new PostCommentsViewModel
                     {
                         Id = x.Id,
                         CreatorId = x.CreatorId,
                         Creator = x.Creator,
                         Contents = x.Contents,
-                        ModifiedOn = x.ModifiedOn,
                         ParrentId = x.ParrentId,
+                        PostId = x.PostId,
                         CreatedOn = x.CreatedOn,
-                        PostId = x.PostId
+                        ModifiedOn = x.ModifiedOn
                     })
                     .OrderByDescending(x => x.CreatedOn)
                     .ToList(),

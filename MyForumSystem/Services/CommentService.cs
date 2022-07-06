@@ -21,6 +21,7 @@ namespace MyForumSystem.Services
                 ParrentId = inputModel.ParrentId,
                 PostId = inputModel.PostId,
                 CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow
             };
 
             await this.db.Comments.AddAsync(newComment);

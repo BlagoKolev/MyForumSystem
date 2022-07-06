@@ -22,7 +22,7 @@ namespace MyForumSystem.Services
                     Name = x.Name,
                     Description = x.Description,
                     Image = x.Image,
-                    CreatedOn = x.CreatedOn,
+                    CreatedOn = x.CreatedOn.ToLocalTime(),
                 })
                 .ToList();
             return categories;
@@ -40,11 +40,11 @@ namespace MyForumSystem.Services
                      CreatorId = x.CreatorId,
                      CategoryId = categoryId,
                      CategoryName = x.Category.Name,
-                     CreatedOn = x.CreatedOn,
-                     ModifiedOn = x.ModifiedOn,
+                     CreatedOn = x.CreatedOn.ToLocalTime(),
+                     ModifiedOn = x.ModifiedOn.ToLocalTime(),
                  })
-                 .OrderByDescending(x=>x.CreatedOn)
-                 .ToList();
+                 .ToList()
+                 .OrderByDescending(x => x.CreatedOn).ToList();
 
             var postsList = new CategoryAllPostViewModel
             {

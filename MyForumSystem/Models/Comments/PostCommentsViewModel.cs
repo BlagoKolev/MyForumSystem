@@ -13,7 +13,7 @@ namespace MyForumSystem.Models.Comments
         public int PostId { get; set; }
         public int? ParrentId { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTime? CreatedOn { get; set; }
-        public DateTime? ModifiedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
     }
 }

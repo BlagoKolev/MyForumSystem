@@ -18,6 +18,10 @@
                     <p class="card-text">Created on: @comment.CreatedOn.ToLocalTime() </p>
                     <p class="card-text">Last modified: @comment.ModifiedOn.ToLocalTime()</p>
                     <a class="btn btn-primary" onclick="ShowAddCommentForm(@comment.Id)"><i class="fa-solid fa-comment-dots"></i></a>
+                    <a class="btn btn-warning" onmouseover="ShowText(@comment.Id)">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <p id="text-@comment.Id" style="display:none">Edit</p>
+                    </a>
                     @{
                         ShowComments(comment.Id);
                     }
@@ -34,6 +38,7 @@
             <p class="card-text">Created on: @Model.CreatedOn</p>
             <p class="card-text">Last modified: @Model.ModifiedOn</p>
             <a class="btn btn-primary" onclick="ShowAddCommentForm(0)"><i class="fa-solid fa-comment-dots"></i></a>
+            <a class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
             <hr />
 
             <form method="Post" id="comment-form" asp-controller="Comment" asp-action="Create" style="display:none">
@@ -76,5 +81,10 @@
       tinycomments_mode: 'embedded',
       tinycomments_author: 'Author name',
     });
+</script>
+<script>
+ function ShowText(commentId){
+     $("#text-"+commentId).toggle();
+ }
 </script>
 }

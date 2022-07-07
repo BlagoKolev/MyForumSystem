@@ -31,10 +31,20 @@
                             <i class="fa-solid fa-pen-to-square"></i>
                             <p id="text-@comment.Id" style="display:none">Edit</p>
                         </a>
-                        <a class="btn btn-danger" onmouseover="ShowText('delete-' + @comment.Id)" onmouseout="HideText('delete-' + @comment.Id)">
+
+                        <a class="btn btn-danger" id="delete-post-btn@(comment.Id)"
+                                 onmouseover="ShowText('delete-' + @comment.Id)"
+                                 onmouseout="HideText('delete-' + @comment.Id)"
+                                 onclick="ShowDeleteConfirm(@comment.Id)">
                             <i class="fa-solid fa-trash-can"></i>
                             <p id="text-delete-@comment.Id" style="display:none">Delete</p>
                         </a>
+
+                        <div id="delete-confirm@(comment.Id)" style="display:none">
+                            <p>Are you sure you want to Delete this post?</p>
+                            <button class="btn btn-danger" >Yes</button>
+                            <button class="btn btn-secondary" onclick="ShowDeleteConfirm(@comment.Id)">No</button>
+                        </div>
                     }
 
                     @{
@@ -63,10 +73,15 @@
                     <i class="fa-solid fa-pen-to-square"></i>
                     <p id="text-edit" style="display:none">Edit</p>
                 </a>
-                <a class="btn btn-danger" onmouseover="ShowText('delete')" onmouseout="HideText('delete')">
+                <a class="btn btn-danger" id="delete-post-btn" onmouseover="ShowText('delete')" onmouseout="HideText('delete')" onclick="ShowDeleteConfirm('')">
                     <i class="fa-solid fa-trash-can"></i>
                     <p id="text-delete" style="display:none">Delete</p>
                 </a>
+                <div id="delete-confirm" style="display:none">
+                    <p>Are you sure you want to Delete this post?</p>
+                    <a class="btn btn-danger" asp-controller="Post" asp-action="Delete" asp-route-postId="@Model.Id">Yes</a>
+                    <button class="btn btn-secondary" onclick="ShowDeleteConfirm('')">No</button>
+                </div>
             }
             <hr />
 
@@ -120,6 +135,19 @@
 
     function HideText(commentId){
         $("#text-" + commentId).hide();
+    }
+</script>
+
+<script>
+    function ShowDeleteConfirm(commentId){
+        if($("#delete-confirm"+commentId).is(":hidden")){
+             $("#delete-confirm"+commentId).show();
+             $("#delete-post-btn"+commentId).hide();
+        }else{
+             $("#delete-confirm"+commentId).hide();
+             $("#delete-post-btn"+commentId).show();
+        }
+
     }
 </script>
 }

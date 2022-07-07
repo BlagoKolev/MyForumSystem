@@ -17,6 +17,12 @@ namespace MyForumSystem.Controllers
             this.userManager = userManager;
         }
 
+        public async Task<IActionResult> Delete(int postId)
+        {
+            postService.DeletePost(postId);
+            return RedirectToAction("Index", "Home");
+        }
+
         public IActionResult ById(int postId)
         {
             var post = postService.GetPostById(postId);

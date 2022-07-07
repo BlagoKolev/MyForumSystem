@@ -31,14 +31,25 @@ namespace MyForumSystem.Services
 
             await db.Posts.AddAsync(newPost);
             await db.SaveChangesAsync();
-            
+
             return newPost.Id;
+        }
+
+        public async Task DeletePost(int postId)
+        {
+            var postToDelete = db.Posts
+                .Where(x => x.Id == postId)
+                .FirstOrDefault();
+
+            postToDelete.IsDeleted = true;
+            await db.SaveChangesAsync();
+
         }
 
         public async Task EditPost(EditPostViewModel inputModel)
         {
             var post = db.Posts
-                .Where(x => x.Id == inputModel.Id && x.IsDeleted==false)
+                .Where(x => x.Id == inputModel.Id && x.IsDeleted == false)
                .FirstOrDefault();
 
             post.Title = inputModel.Title;

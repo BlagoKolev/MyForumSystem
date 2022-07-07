@@ -34,6 +34,30 @@ namespace MyForumSystem.Controllers
             return Redirect($"/Post/ById?postId={inputModel.PostId}");
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult Edit(int commentId)
+        {
+            var comment = commentService.GetById(commentId);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return this.View(comment);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(EditCommentViewModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Edit), new { commentId = inputModel.Id });
+            }
+           await commentService.EditComment(inputModel);
+            return RedirectToAction("ById", "Post", new { postId = inputModel.PostId });
+        }
+
         private string GetUserId()
         {
             return userManager.GetUserId(this.User);

@@ -70,7 +70,7 @@ namespace MyForumSystem.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(EditPostViewModel inputModel, int Id)
+        public async Task<IActionResult> Edit(EditPostViewModel inputModel)
         {
             if (!ModelState.IsValid)
             {

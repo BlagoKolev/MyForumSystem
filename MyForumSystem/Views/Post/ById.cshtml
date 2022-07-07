@@ -24,14 +24,19 @@
                         <i class="fa-solid fa-comment-dots"></i>
                         <p id="text-comment-@comment.Id" style="display: none">Comment</p>
                     </a>
-                    <a class="btn btn-warning" onmouseover="ShowText(@comment.Id)" onmouseout="HideText(@comment.Id)">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        <p id="text-@comment.Id" style="display:none">Edit</p>
-                    </a>
-                    <a class="btn btn-danger" onmouseover="ShowText('delete-' + @comment.Id)" onmouseout="HideText('delete-' + @comment.Id)">
-                        <i class="fa-solid fa-trash-can"></i>
-                        <p id="text-delete-@comment.Id" style="display:none">Delete</p>
-                    </a>
+
+                    @if (userManager.GetUserId(this.User) == comment.CreatorId)
+                    {
+                        <a href="/Comment/Edit?commentId=@comment.Id" class="btn btn-warning" onmouseover="ShowText(@comment.Id)" onmouseout="HideText(@comment.Id)">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <p id="text-@comment.Id" style="display:none">Edit</p>
+                        </a>
+                        <a class="btn btn-danger" onmouseover="ShowText('delete-' + @comment.Id)" onmouseout="HideText('delete-' + @comment.Id)">
+                            <i class="fa-solid fa-trash-can"></i>
+                            <p id="text-delete-@comment.Id" style="display:none">Delete</p>
+                        </a>
+                    }
+
                     @{
                         ShowComments(comment.Id);
                     }

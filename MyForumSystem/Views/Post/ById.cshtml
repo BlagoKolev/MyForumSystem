@@ -17,8 +17,11 @@
                     <h5 class="card-title">@Html.Raw(comment.SanitizedContents)</h5>
                     <p class="card-text">Created on: @comment.CreatedOn.ToLocalTime() </p>
                     <p class="card-text">Last modified: @comment.ModifiedOn.ToLocalTime()</p>
-                    <a class="btn btn-primary" onclick="ShowAddCommentForm(@comment.Id)"><i class="fa-solid fa-comment-dots"></i></a>
-                    <a class="btn btn-warning" onmouseover="ShowText(@comment.Id)">
+                    <a class="btn btn-primary" onclick="ShowAddCommentForm(@comment.Id)" onmouseover="ShowText('comment-' + @comment.Id)" onmouseout="HideText('comment-' + @comment.Id)">
+                        <i class="fa-solid fa-comment-dots"></i>
+                        <p id="text-comment-@comment.Id" style="display: none">Comment</p>
+                    </a>
+                    <a class="btn btn-warning" onmouseover="ShowText(@comment.Id)" onmouseout="HideText(@comment.Id)">
                         <i class="fa-solid fa-pen-to-square"></i>
                         <p id="text-@comment.Id" style="display:none">Edit</p>
                     </a>
@@ -37,8 +40,18 @@
             <h5 class="card-title">@Html.Raw(Model.SanitizedContents)</h5>
             <p class="card-text">Created on: @Model.CreatedOn</p>
             <p class="card-text">Last modified: @Model.ModifiedOn</p>
-            <a class="btn btn-primary" onclick="ShowAddCommentForm(0)"><i class="fa-solid fa-comment-dots"></i></a>
-            <a class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a class="btn btn-primary" onclick="ShowAddCommentForm(0)" onmouseover="ShowText('comment')" onmouseout="HideText('comment')">
+                <i class="fa-solid fa-comment-dots"></i>
+                <p id="text-comment" style="display: none">Comment</p>
+            </a>
+            <a class="btn btn-warning" onmouseover="ShowText('edit')" onmouseout="HideText('edit')">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <p id="text-edit" style="display:none">Edit</p>
+            </a>
+            <a class="btn btn-danger" onmouseover="ShowText('del')" onmouseout="HideText('delete')">
+                <i class="fa-solid fa-trash-can"></i>
+                <p class="text-del" style="display:none">Delete</p>
+            </a>
             <hr />
 
             <form method="Post" id="comment-form" asp-controller="Comment" asp-action="Create" style="display:none">
@@ -72,6 +85,7 @@
     }, 300);
       }
 </script>
+
 <script>
     tinymce.init({
       selector: 'textarea',
@@ -82,9 +96,14 @@
       tinycomments_author: 'Author name',
     });
 </script>
+
 <script>
- function ShowText(commentId){
-     $("#text-"+commentId).toggle();
- }
+    function ShowText(commentId){
+        $("#text-" + commentId).show();
+    }
+
+    function HideText(commentId){
+        $("#text-" + commentId).hide();
+    }
 </script>
 }

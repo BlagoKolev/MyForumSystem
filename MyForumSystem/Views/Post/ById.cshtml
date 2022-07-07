@@ -1,5 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Html
 @using System.Globalization
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> userManager
+
 @model PostViewModel
 @{
     void ShowComments(int? parrentId)
@@ -48,14 +51,18 @@
                 <i class="fa-solid fa-comment-dots"></i>
                 <p id="text-comment" style="display: none">Comment</p>
             </a>
-            <a class="btn btn-warning" onmouseover="ShowText('edit')" onmouseout="HideText('edit')" asp-controller="Post" asp-action="Edit" asp-route-postId="@Model.Id">
-                <i class="fa-solid fa-pen-to-square"></i>
-                <p id="text-edit" style="display:none">Edit</p>
-            </a>
-            <a class="btn btn-danger" onmouseover="ShowText('delete')" onmouseout="HideText('delete')">
-                <i class="fa-solid fa-trash-can"></i>
-                <p id="text-delete" style="display:none">Delete</p>
-            </a>
+
+            @if (userManager.GetUserId(this.User) == Model.CreatorId)
+            {
+                <a class="btn btn-warning" onmouseover="ShowText('edit')" onmouseout="HideText('edit')" asp-controller="Post" asp-action="Edit" asp-route-postId="@Model.Id">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <p id="text-edit" style="display:none">Edit</p>
+                </a>
+                <a class="btn btn-danger" onmouseover="ShowText('delete')" onmouseout="HideText('delete')">
+                    <i class="fa-solid fa-trash-can"></i>
+                    <p id="text-delete" style="display:none">Delete</p>
+                </a>
+            }
             <hr />
 
             <form method="Post" id="comment-form" asp-controller="Comment" asp-action="Create" style="display:none">

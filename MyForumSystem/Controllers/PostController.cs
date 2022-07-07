@@ -56,6 +56,30 @@ namespace MyForumSystem.Controllers
             return RedirectToAction(nameof(ById), new { postId });
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult Edit(int postId)
+        {
+            var postToEdit = postService.GetPostByIdToEdit(postId);
+            if (postToEdit == null)
+            {
+                return NotFound();
+            }
+            return this.View(postToEdit);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(EditPostViewModel inputModel, int Id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Edit), new { postId = inputModel.Id });
+            }
+           await postService.EditPost(inputModel);
+            return RedirectToAction(nameof(ById), new {postId = inputModel.Id});
+        }
+
         private string GetUserId()
         {
             return this.userManager.GetUserId(this.User);

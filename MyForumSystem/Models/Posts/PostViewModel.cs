@@ -1,6 +1,5 @@
 ﻿using Ganss.XSS;
 using Microsoft.AspNetCore.Identity;
-using MyForumSystem.Data.Models;
 using MyForumSystem.Models.Comments;
 
 namespace MyForumSystem.Models.Posts

@@ -29,10 +29,23 @@ namespace MyForumSystem.Services
                 ModifiedOn = DateTime.UtcNow,
             };
 
-            await this.db.Posts.AddAsync(newPost);
-            await this.db.SaveChangesAsync();
+            await db.Posts.AddAsync(newPost);
+            await db.SaveChangesAsync();
             
             return newPost.Id;
+        }
+
+        public async Task EditPost(EditPostViewModel inputModel)
+        {
+            var post = db.Posts
+                .Where(x => x.Id == inputModel.Id && x.IsDeleted==false)
+               .FirstOrDefault();
+
+            post.Title = inputModel.Title;
+            post.Contents = inputModel.Contents;
+            post.ModifiedOn = DateTime.UtcNow;
+
+            await db.SaveChangesAsync();
         }
 
         public PostViewModel GetPostById(int postId)
@@ -65,6 +78,25 @@ namespace MyForumSystem.Services
                 })
                 .FirstOrDefault();
             return post;
+        }
+
+        public EditPostViewModel GetPostByIdToEdit(int postId)
+        {
+            var postToEdit = db.Posts
+                .Where(x => x.Id == postId)
+                .Select(x => new EditPostViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Contents = x.Contents,
+                    CategoryId = x.CategoryId,
+                    CreatorId = x.CreatorId,
+                    CreatedOn = x.CreatedOn,
+                    ModifiedOn = x.ModifiedOn,
+                })
+                .FirstOrDefault();
+
+            return postToEdit;
         }
     }
 }

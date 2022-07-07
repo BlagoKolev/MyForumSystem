@@ -25,6 +25,10 @@
                         <i class="fa-solid fa-pen-to-square"></i>
                         <p id="text-@comment.Id" style="display:none">Edit</p>
                     </a>
+                    <a class="btn btn-danger" onmouseover="ShowText('delete-' + @comment.Id)" onmouseout="HideText('delete-' + @comment.Id)">
+                        <i class="fa-solid fa-trash-can"></i>
+                        <p id="text-delete-@comment.Id" style="display:none">Delete</p>
+                    </a>
                     @{
                         ShowComments(comment.Id);
                     }
@@ -44,13 +48,13 @@
                 <i class="fa-solid fa-comment-dots"></i>
                 <p id="text-comment" style="display: none">Comment</p>
             </a>
-            <a class="btn btn-warning" onmouseover="ShowText('edit')" onmouseout="HideText('edit')">
+            <a class="btn btn-warning" onmouseover="ShowText('edit')" onmouseout="HideText('edit')" asp-controller="Post" asp-action="Edit" asp-route-postId="@Model.Id">
                 <i class="fa-solid fa-pen-to-square"></i>
                 <p id="text-edit" style="display:none">Edit</p>
             </a>
-            <a class="btn btn-danger" onmouseover="ShowText('del')" onmouseout="HideText('delete')">
+            <a class="btn btn-danger" onmouseover="ShowText('delete')" onmouseout="HideText('delete')">
                 <i class="fa-solid fa-trash-can"></i>
-                <p class="text-del" style="display:none">Delete</p>
+                <p id="text-delete" style="display:none">Delete</p>
             </a>
             <hr />
 

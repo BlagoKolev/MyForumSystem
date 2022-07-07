@@ -6,5 +6,7 @@ namespace MyForumSystem.Services
     {
         PostViewModel GetPostById(int postId);
         Task<int> CreatePost(CreatePostViewModel inputModel, string userId);
+        EditPostViewModel GetPostByIdToEdit(int postId);
+        Task EditPost(EditPostViewModel inputModel);
     }
 }

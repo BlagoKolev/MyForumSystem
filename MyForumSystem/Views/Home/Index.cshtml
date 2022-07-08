@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <a class="text-decoration-none" asp-controller="Category" asp-action="AllPosts" asp-route-categoryId="@category.Id" asp-route-categoryName="@category.Name">
+                                <a class="text-decoration-none" asp-controller="Category" asp-action="AllPosts" asp-route-categoryId="@category.Id" asp-route-categoryName="@category.Name" asp-route-pageNumber="1">
                                     <h5 class="card-title">@category.Name</h5>
                                 </a>
                                 <p class="card-text">@category.Description</p>

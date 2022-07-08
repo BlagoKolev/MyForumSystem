@@ -46,6 +46,7 @@ namespace MyForumSystem.Services
                 .FirstOrDefault();
             comment.Contents = inputModel.Contents;
             comment.ModifiedOn = DateTime.UtcNow;
+           
             await db.SaveChangesAsync();
         }
 

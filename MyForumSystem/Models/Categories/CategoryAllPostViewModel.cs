@@ -1,6 +1,6 @@
 ﻿namespace MyForumSystem.Models.Categories
 {
-    public class CategoryAllPostViewModel
+    public class CategoryAllPostViewModel : PagingViewModel
     {
         public CategoryAllPostViewModel()
         {

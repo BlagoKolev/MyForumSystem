@@ -12,17 +12,20 @@ namespace MyForumSystem.Controllers
             this.categoryService = categoryService;
         }
 
-        public IActionResult AllPosts(int categoryId, string categoryName)
+        public IActionResult AllPosts(int categoryId, string categoryName, int pageNumber = 1)
         {
-            var posts = categoryService.GetAllPosts(categoryId);
+            var postsList = categoryService.GetAllPosts(categoryId, pageNumber);
 
-            if (posts == null)
+            if (postsList == null)
             {
                 return NotFound();
             }
-            posts.CategoryId = categoryId;
+            postsList.CurrentPage = pageNumber;
+            postsList.ItemsCount = categoryService.GetPostsCount(categoryId);
+            postsList.CategoryId = categoryId;
             ViewData["categoryName"] = categoryName;
-            return this.View(posts); 
+
+            return this.View(postsList);
         }
     }
 }

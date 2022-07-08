@@ -14,6 +14,7 @@ namespace MyForumSystem.Data
         public const int TitleMinLength = 3;
         public const int DescriptionMaxLength = 100;
         public const int DescriptionMinLength = 3;
+        public const int ItemsPerPage = 10;
 
         public const string RequiredFieldWarning = "The '{0}' field is reqired.";
         public const string FieldLengthWarning = "Field {0} must be between {2} and {1} sumbols.";

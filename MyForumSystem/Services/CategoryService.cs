@@ -1,5 +1,5 @@
 ﻿using MyForumSystem.Data;
-using MyForumSystem.Data.Models;
+using static MyForumSystem.Data.GlobalConstants;
 using MyForumSystem.Models.Categories;
 
 namespace MyForumSystem.Services
@@ -28,10 +28,13 @@ namespace MyForumSystem.Services
             return categories;
         }
 
-        public CategoryAllPostViewModel GetAllPosts(int categoryId)
+        public CategoryAllPostViewModel GetAllPosts(int categoryId, int pageNumber)
         {
             var posts = db.Posts
                  .Where(x => !x.IsDeleted && x.CategoryId == categoryId)
+                 .OrderByDescending(x => x.CreatedOn)
+                 .Skip(((pageNumber - 1) * ItemsPerPage))
+                 .Take(ItemsPerPage)
                  .Select(x => new CategoryPostViewModel
                  {
                      Id = x.Id,
@@ -43,8 +46,7 @@ namespace MyForumSystem.Services
                      CreatedOn = x.CreatedOn.ToLocalTime(),
                      ModifiedOn = x.ModifiedOn.ToLocalTime(),
                  })
-                 .ToList()
-                 .OrderByDescending(x => x.CreatedOn).ToList();
+                 .ToList();
 
             var postsList = new CategoryAllPostViewModel
             {
@@ -52,6 +54,11 @@ namespace MyForumSystem.Services
             };
 
             return postsList;
+        }
+
+        public int GetPostsCount(int categoryId)
+        {
+            return db.Posts.Where(x=>x.CategoryId == categoryId).Count();
         }
     }
 }

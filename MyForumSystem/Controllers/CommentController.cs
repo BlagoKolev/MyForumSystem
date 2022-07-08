@@ -18,6 +18,14 @@ namespace MyForumSystem.Controllers
             this.commentService = commentService;
         }
 
+        
+        [Authorize]
+        public async Task<IActionResult> Delete(int commentId)
+        {
+            var postId = await commentService.DeleteComment(commentId);
+            return RedirectToAction("ById", "Post", new { postId });
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create(CreateCommentInputModel inputModel)
@@ -54,7 +62,7 @@ namespace MyForumSystem.Controllers
             {
                 return RedirectToAction(nameof(Edit), new { commentId = inputModel.Id });
             }
-           await commentService.EditComment(inputModel);
+            await commentService.EditComment(inputModel);
             return RedirectToAction("ById", "Post", new { postId = inputModel.PostId });
         }
 

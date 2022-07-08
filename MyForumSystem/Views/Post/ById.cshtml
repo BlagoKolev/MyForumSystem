@@ -42,7 +42,7 @@
 
                         <div id="delete-confirm@(comment.Id)" style="display:none">
                             <p>Are you sure you want to Delete this post?</p>
-                            <button class="btn btn-danger" >Yes</button>
+                            <a class="btn btn-danger" href="/Comment/Delete?commentId=@comment.Id" >Yes</a>
                             <button class="btn btn-secondary" onclick="ShowDeleteConfirm(@comment.Id)">No</button>
                         </div>
                     }

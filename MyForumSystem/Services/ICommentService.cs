@@ -7,5 +7,6 @@ namespace MyForumSystem.Services
         Task Create(string userId, CreateCommentInputModel inputModel);
         EditCommentViewModel GetById(int commentId);
         Task EditComment(EditCommentViewModel inputModel);
+        Task<int> DeleteComment(int commentId);
     }
 }

@@ -28,6 +28,17 @@ namespace MyForumSystem.Services
             await this.db.SaveChangesAsync();
         }
 
+        public async Task<int> DeleteComment(int commentId)
+        {
+            var commentToDelete = db.Comments
+                .Where(x => x.Id == commentId)
+                .FirstOrDefault();
+            commentToDelete.IsDeleted = true;
+
+            await db.SaveChangesAsync();
+            return commentToDelete.PostId;
+        }
+
         public async Task EditComment(EditCommentViewModel inputModel)
         {
             var comment = db.Comments

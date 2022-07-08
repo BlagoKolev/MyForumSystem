@@ -73,7 +73,9 @@ namespace MyForumSystem.Services
                     Creator = db.Users.Where(a => a.Id == x.CreatorId).FirstOrDefault(),
                     CreatedOn = x.CreatedOn.ToLocalTime(),
                     ModifiedOn = x.ModifiedOn.ToLocalTime(),
-                    Comments = x.Comments.Select(x => new PostCommentsViewModel
+                    Comments = x.Comments
+                    .Where(x => !x.IsDeleted)
+                    .Select(x => new PostCommentsViewModel
                     {
                         Id = x.Id,
                         CreatorId = x.CreatorId,

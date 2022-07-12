@@ -7,13 +7,15 @@ namespace MyForumSystem.Controllers
         [Route("Error/{statusCode}")]
         public IActionResult ErrorHandler(int statusCode)
         {
+            var viewName = string.Empty;
+
             switch (statusCode)
             {
-                case (400-499): ViewData["errorMessage"] = "Sorry the resource you are looking for could not be found"; break;
+                case (404): viewName = "NotFound"; break;
                 default:
                     break;
             }
-            return View("NotFound");
+            return View(viewName);
         }
     }
 }

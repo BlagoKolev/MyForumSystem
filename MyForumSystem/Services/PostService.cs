@@ -88,6 +88,7 @@ namespace MyForumSystem.Services
                     })
                     .OrderByDescending(x => x.CreatedOn)
                     .ToList(),
+                    Votes = x.Votes
                 })
                 .FirstOrDefault();
             return post;

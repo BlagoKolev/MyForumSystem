@@ -1,5 +1,6 @@
 ﻿using Ganss.XSS;
 using Microsoft.AspNetCore.Identity;
+using MyForumSystem.Data.Models;
 using MyForumSystem.Models.Comments;
 
 namespace MyForumSystem.Models.Posts
@@ -9,6 +10,7 @@ namespace MyForumSystem.Models.Posts
         public PostViewModel()
         {
             this.Comments = new List<PostCommentsViewModel>();
+            this.Votes = new List<Vote>();
         }
         public int Id { get; set; }
         public string? Title { get; set; }
@@ -20,6 +22,7 @@ namespace MyForumSystem.Models.Posts
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
         public ICollection<PostCommentsViewModel> Comments { get; set; }
+        public ICollection<Vote> Votes { get; set; }
 
     }
 }

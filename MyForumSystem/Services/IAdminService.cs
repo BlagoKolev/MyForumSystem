@@ -1,7 +1,10 @@
-﻿namespace MyForumSystem.Services
+﻿using MyForumSystem.Areas.Admin.Models.Posts;
+using MyForumSystem.Models.Posts;
+
+namespace MyForumSystem.Services
 {
-    public class IAdminService
+    public interface IAdminService
     {
-        
+        AllPostsApproveViewModel GetPostsToApprove();
     }
 }

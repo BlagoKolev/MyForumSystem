@@ -62,7 +62,7 @@ namespace MyForumSystem.Services
         public PostViewModel GetPostById(int postId)
         {
             var post = db.Posts
-                .Where(x => x.Id == postId)
+                .Where(x => x.Id == postId && x.IsApproved)
                 .Select(x => new PostViewModel
                 {
                     Id = x.Id,
@@ -74,7 +74,7 @@ namespace MyForumSystem.Services
                     CreatedOn = x.CreatedOn.ToLocalTime(),
                     ModifiedOn = x.ModifiedOn.ToLocalTime(),
                     Comments = x.Comments
-                    .Where(x => !x.IsDeleted)
+                    .Where(x => !x.IsDeleted && x.IsApproved)
                     .Select(x => new PostCommentsViewModel
                     {
                         Id = x.Id,

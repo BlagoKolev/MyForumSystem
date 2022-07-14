@@ -31,7 +31,7 @@ namespace MyForumSystem.Services
         public CategoryAllPostViewModel GetAllPosts(int categoryId, int pageNumber)
         {
             var posts = db.Posts
-                 .Where(x => !x.IsDeleted && x.CategoryId == categoryId)
+                 .Where(x => !x.IsDeleted && x.CategoryId == categoryId && x.IsApproved)
                  .OrderByDescending(x => x.CreatedOn)
                  .Skip(((pageNumber - 1) * ItemsPerPage))
                  .Take(ItemsPerPage)

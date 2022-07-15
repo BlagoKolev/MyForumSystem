@@ -41,6 +41,7 @@ namespace MyForumSystem.Services
                    Title = x.Title,
                    Contents = x.Contents,
                    CategoryId = x.CategoryId,
+                   CategoryName = x.Category.Name,
                    CreatorId = x.CreatorId,
                    Creator = db.Users.Where(a => a.Id == x.CreatorId).FirstOrDefault(),
                    CreatedOn = x.CreatedOn.ToLocalTime(),

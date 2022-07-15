@@ -20,6 +20,8 @@ else
                 <div class="card-body">
                     <h5 class="card-title">@Html.Raw(post.SanitizedContents)</h5>
                     <p class="card-text">Created on: @post.CreatedOn</p>
+                    <p class="card-text">Creator: @post.Creator.UserName</p>
+                    <p class="card-text">Post is in: <b> @post.CategoryName</b> category</p>
                     <div id="buttons-container-@post.Id">
                         <button id="button-ok-@post.Id" class="btn btn-success" onclick="ConfirmAction(@post.Id,true)"> <i class="fa-solid fa-circle-check"></i></button>
                         <button id="button-no-@post.Id" class="btn btn-danger" onclick="ConfirmAction(@post.Id, false)"><i class="fa-solid fa-ban"></i></button>

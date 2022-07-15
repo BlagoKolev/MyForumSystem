@@ -7,5 +7,6 @@ namespace MyForumSystem.Services
     {
         AllPostsApproveViewModel GetPostsToApprove();
         Task ApprovePost(int postId);
+        Task DeclinePost(int postId);
     }
 }

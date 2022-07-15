@@ -15,10 +15,19 @@ namespace MyForumSystem.Services
 
         public async Task ApprovePost(int postId)
         {
-            var postToapprove = db.Posts
+            var postToApprove = db.Posts
                 .Where(x => x.Id == postId)
                 .FirstOrDefault();
-            postToapprove.IsApproved = true;
+            postToApprove.IsApproved = true;
+            await db.SaveChangesAsync();
+        }
+
+        public async Task DeclinePost(int postId)
+        {
+            var postToDecline = db.Posts
+               .Where(x => x.Id == postId)
+               .FirstOrDefault();
+            postToDecline.IsDeleted = true;
             await db.SaveChangesAsync();
         }
 

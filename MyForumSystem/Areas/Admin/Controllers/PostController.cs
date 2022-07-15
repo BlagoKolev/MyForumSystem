@@ -27,5 +27,12 @@ namespace MyForumSystem.Areas.Admin.Controllers
            await adminService.ApprovePost(postId);
            return RedirectToAction(nameof(All));
         }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeclinePost(int postId)
+        {
+            await adminService.DeclinePost(postId);
+            return RedirectToAction(nameof(All));
+        }
     }
 }

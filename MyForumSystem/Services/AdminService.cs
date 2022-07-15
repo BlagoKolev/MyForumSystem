@@ -12,6 +12,16 @@ namespace MyForumSystem.Services
         {
             this.db = db;
         }
+
+        public async Task ApprovePost(int postId)
+        {
+            var postToapprove = db.Posts
+                .Where(x => x.Id == postId)
+                .FirstOrDefault();
+            postToapprove.IsApproved = true;
+            await db.SaveChangesAsync();
+        }
+
         public AllPostsApproveViewModel GetPostsToApprove()
         {
             var posts = db.Posts
@@ -25,7 +35,7 @@ namespace MyForumSystem.Services
                    CreatorId = x.CreatorId,
                    Creator = db.Users.Where(a => a.Id == x.CreatorId).FirstOrDefault(),
                    CreatedOn = x.CreatedOn.ToLocalTime(),
-                   ModifiedOn = x.ModifiedOn.ToLocalTime(),                  
+                   ModifiedOn = x.ModifiedOn.ToLocalTime(),
                })
                .ToList();
 

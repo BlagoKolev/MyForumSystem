@@ -6,5 +6,6 @@ namespace MyForumSystem.Services
     public interface IAdminService
     {
         AllPostsApproveViewModel GetPostsToApprove();
+        Task ApprovePost(int postId);
     }
 }

@@ -34,7 +34,7 @@ namespace MyForumSystem.Services
         public AllPostsApproveViewModel GetPostsToApprove()
         {
             var posts = db.Posts
-               .Where(x => !x.IsApproved)
+               .Where(x => !x.IsApproved && !x.IsDeleted)
                .Select(x => new PostApproveViewModel
                {
                    Id = x.Id,

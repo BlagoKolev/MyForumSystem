@@ -59,7 +59,8 @@ namespace MyForumSystem.Controllers
             var userId = GetUserId();
             var postId = await postService.CreatePost(inputModel, userId);
 
-            return RedirectToAction(nameof(ById), new { postId });
+            //return RedirectToAction(nameof(ById), new { postId });
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

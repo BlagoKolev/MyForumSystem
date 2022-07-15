@@ -31,7 +31,7 @@ else
                     </div>
                     <div id="decline-confirm-@post.Id" style="display:none">
                         <h6>Are you sure you want to <b style="color:crimson">Decline</b> this post?</h6>
-                        <a class="btn btn-success">Yes</a>
+                        <a href="/Admin/Post/DeclinePost/?postId=@post.Id" class="btn btn-success">Yes</a>
                         <a class="btn btn-danger" onclick="CloseConfirmation(@post.Id)">No</a>
                     </div>
                 </div>

@@ -26,5 +26,11 @@ namespace MyForumSystem.Areas.Admin.Controllers
             await adminService.ApproveComment(commentId);
             return RedirectToAction(nameof(All));
         }
+
+        public async Task<IActionResult> DeclineComment(int commentId)
+        {
+            await adminService.DeclineComment(commentId);
+            return RedirectToAction(nameof(All));
+        }
     }
 }

@@ -19,7 +19,10 @@ namespace MyForumSystem.Services
             var commentToApprove = db.Comments
                 .Where(x => !x.IsApproved && !x.IsDeleted)
                 .FirstOrDefault();
-
+            if (commentToApprove == null)
+            {
+                return;
+            }
             commentToApprove.IsApproved = true;
             commentToApprove.ApprovedOn = DateTime.UtcNow;
             await db.SaveChangesAsync();
@@ -30,14 +33,26 @@ namespace MyForumSystem.Services
             var postToApprove = db.Posts
                 .Where(x => x.Id == postId)
                 .FirstOrDefault();
+            if (postToApprove == null)
+            {
+                return;
+            }
             postToApprove.IsApproved = true;
             postToApprove.ApprovedOn = DateTime.UtcNow;
             await db.SaveChangesAsync();
         }
 
-        public Task DeclineComment(int commentId)
+        public async Task DeclineComment(int commentId)
         {
-            throw new NotImplementedException();
+            var commentToDecline = db.Comments
+                .Where(x => x.Id == commentId)
+                .FirstOrDefault();
+            if (commentToDecline == null)
+            {
+                return;
+            }
+            commentToDecline.IsDeleted = true;
+            await db.SaveChangesAsync();
         }
 
         public async Task DeclinePost(int postId)
@@ -45,6 +60,10 @@ namespace MyForumSystem.Services
             var postToDecline = db.Posts
                .Where(x => x.Id == postId)
                .FirstOrDefault();
+            if (postToDecline == null)
+            {
+                return;
+            }
             postToDecline.IsDeleted = true;
             await db.SaveChangesAsync();
         }

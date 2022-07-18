@@ -10,5 +10,7 @@ namespace MyForumSystem.Services
         Task ApprovePost(int postId);
         Task DeclinePost(int postId);
         AllCommentsApproveViewModel GetCommentsToApprove();
+        Task ApproveComment (int commentId);
+        Task DeclineComment(int commentId); 
     }
 }

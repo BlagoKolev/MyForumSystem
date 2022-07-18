@@ -20,5 +20,11 @@ namespace MyForumSystem.Areas.Admin.Controllers
             var postsToApprove = adminService.GetCommentsToApprove();
             return View(postsToApprove);
         }
+
+        public async Task<IActionResult> ApproveComment(int commentId)
+        {
+            await adminService.ApproveComment(commentId);
+            return RedirectToAction(nameof(All));
+        }
     }
 }

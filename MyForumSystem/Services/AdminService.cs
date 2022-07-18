@@ -14,6 +14,17 @@ namespace MyForumSystem.Services
             this.db = db;
         }
 
+        public async Task ApproveComment(int commentId)
+        {
+            var commentToApprove = db.Comments
+                .Where(x => !x.IsApproved && !x.IsDeleted)
+                .FirstOrDefault();
+
+            commentToApprove.IsApproved = true;
+            commentToApprove.ApprovedOn = DateTime.UtcNow;
+            await db.SaveChangesAsync();
+        }
+
         public async Task ApprovePost(int postId)
         {
             var postToApprove = db.Posts
@@ -22,6 +33,11 @@ namespace MyForumSystem.Services
             postToApprove.IsApproved = true;
             postToApprove.ApprovedOn = DateTime.UtcNow;
             await db.SaveChangesAsync();
+        }
+
+        public Task DeclineComment(int commentId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task DeclinePost(int postId)

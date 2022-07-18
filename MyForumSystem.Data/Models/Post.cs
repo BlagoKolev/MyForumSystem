@@ -42,7 +42,7 @@ namespace MyForumSystem.Data.Models
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
         public bool IsApproved { get; set; }
-
+        public DateTime? ApprovedOn { get; set; } = null;
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Vote> Votes { get; set; }
 

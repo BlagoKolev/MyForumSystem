@@ -15,22 +15,22 @@ else
     {
         <div class="card mb-3">
             <div class="card ">
-                <a asp-controller="Post" asp-action="ById" asp-items-postId="@comment.PostId">Original post</a>
+                <a href="/Post/ById/?postId=@comment.PostId">Go to original post...</a>
                 <div class="card-body">
                     <h5 class="card-title">@Html.Raw(comment.SanitizedContents)</h5>
                     <p class="card-text">Created on: @comment.CreatedOn</p>
                     <p class="card-text">Creator: @comment.Creator.UserName</p>
                     <p class="card-text">Post is in: <b> @comment.CategoryName</b> category</p>
-                    <div id="buttons-container-@comment.Id">
-                        <button id="button-ok-@comment.Id" class="btn btn-success" onclick="ConfirmAction(@comment.Id,true)"> <i class="fa-solid fa-circle-check"></i></button>
-                        <button id="button-no-@comment.Id" class="btn btn-danger" onclick="ConfirmAction(@comment.Id, false)"><i class="fa-solid fa-ban"></i></button>
+                    <div id="comment-buttons-container-@comment.Id">
+                        <button id="comment-button-ok-@comment.Id" class="btn btn-success" onclick="ConfirmAction(@comment.Id,true)"> <i class="fa-solid fa-circle-check"></i></button>
+                        <button id="comment-button-no-@comment.Id" class="btn btn-danger" onclick="ConfirmAction(@comment.Id, false)"><i class="fa-solid fa-ban"></i></button>
                     </div>
-                    <div id="approve-confirm-@comment.Id" style="display:none">
+                    <div id="comment-approve-confirm-@comment.Id" style="display:none">
                         <h6>Are you sure you want to <b style="color:green">Approve</b> this post?</h6>
                         <a href="/Admin/Post/ApprovePost/?postId=@comment.Id" class="btn btn-success">Yes</a>
                         <a class="btn btn-danger" onclick="CloseConfirmation(@comment.Id)">No</a>
                     </div>
-                    <div id="decline-confirm-@comment.Id" style="display:none">
+                    <div id="comment-decline-confirm-@comment.Id" style="display:none">
                         <h6>Are you sure you want to <b style="color:crimson">Decline</b> this post?</h6>
                         <a href="/Admin/Post/DeclinePost/?postId=@comment.Id" class="btn btn-success">Yes</a>
                         <a class="btn btn-danger" onclick="CloseConfirmation(@comment.Id)">No</a>
@@ -47,20 +47,20 @@ else
     <script>
         function ConfirmAction(postId, isApprove) {
             if (isApprove) {
-                $("#buttons-container-" + postId).hide();
-                $("#approve-confirm-" + postId).show();
+                $("#comment-buttons-container-" + postId).hide();
+                $("#comment-approve-confirm-" + postId).show();
             } else {
-                $("#buttons-container-" + postId).hide();
-                $("#decline-confirm-" + postId).show();
+                $("#comment-buttons-container-" + postId).hide();
+                $("#comment-decline-confirm-" + postId).show();
             }
 
         }
     </script>
     <script>
         function CloseConfirmation(postId) {
-            $("#approve-confirm-" + postId).hide();
-            $("#decline-confirm-" + postId).hide();
-            $("#buttons-container-" + postId).show();
+            $("#comment-approve-confirm-" + postId).hide();
+            $("#comment-decline-confirm-" + postId).hide();
+            $("#comment-buttons-container-" + postId).show();
         }
     </script>
 }

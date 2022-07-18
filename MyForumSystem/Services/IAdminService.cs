@@ -1,4 +1,5 @@
-﻿using MyForumSystem.Areas.Admin.Models.Posts;
+﻿using MyForumSystem.Areas.Admin.Models.Comments;
+using MyForumSystem.Areas.Admin.Models.Posts;
 using MyForumSystem.Models.Posts;
 
 namespace MyForumSystem.Services
@@ -8,5 +9,6 @@ namespace MyForumSystem.Services
         AllPostsApproveViewModel GetPostsToApprove();
         Task ApprovePost(int postId);
         Task DeclinePost(int postId);
+        AllCommentsApproveViewModel GetCommentsToApprove();
     }
 }

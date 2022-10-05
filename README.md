@@ -38,4 +38,7 @@
 - Bootstrap
 - TinyMCE (Text editor for writing posts and comments)
 - JQuery
+---
+### :camera: Screenshots
+![Home page](https://user-images.githubusercontent.com/64737227/193987837-e769dbe3-5c54-4f4a-a99a-8ed6a11557d3.png)
 

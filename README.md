@@ -45,4 +45,4 @@
 ### Read post
 ![Read Post](https://user-images.githubusercontent.com/64737227/193990240-9d16852f-95d4-4197-a67d-813c17002915.png)
 ### Write Comment
-
+![Write Comment](https://user-images.githubusercontent.com/64737227/193990599-c25f90d1-a92e-4279-b2b6-f6bcd6f527bb.png)

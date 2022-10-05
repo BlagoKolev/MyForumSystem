@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using MyForumSystem.Data;
-using MyForumSystem.Data.Models;
-
+﻿
 namespace MyForumSystem.Infrastructure
 {
     public static class ApplicationBuilderExtensions

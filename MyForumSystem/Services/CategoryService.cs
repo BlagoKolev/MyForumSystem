@@ -1,6 +1,4 @@
-﻿using MyForumSystem.Data;
-using static MyForumSystem.Data.GlobalConstants;
-using MyForumSystem.Models.Categories;
+﻿using MyForumSystem.Models.Categories;
 
 namespace MyForumSystem.Services
 {
@@ -27,7 +25,6 @@ namespace MyForumSystem.Services
                 .ToList();
             return categories;
         }
-
         public CategoryAllPostViewModel GetAllPosts(int categoryId, int pageNumber)
         {
             var posts = db.Posts
@@ -55,10 +52,9 @@ namespace MyForumSystem.Services
 
             return postsList;
         }
-
         public int GetPostsCount(int categoryId)
         {
-            return db.Posts.Where(x=>x.CategoryId == categoryId).Count();
+            return db.Posts.Where(x => x.CategoryId == categoryId).Count();
         }
     }
 }

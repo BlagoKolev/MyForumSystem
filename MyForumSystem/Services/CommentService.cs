@@ -1,6 +1,4 @@
 ﻿using MyForumSystem.Models.Comments;
-using MyForumSystem.Data;
-using MyForumSystem.Data.Models;
 
 namespace MyForumSystem.Services
 {
@@ -46,7 +44,7 @@ namespace MyForumSystem.Services
                 .FirstOrDefault();
             comment.Contents = inputModel.Contents;
             comment.ModifiedOn = DateTime.UtcNow;
-           
+
             await db.SaveChangesAsync();
         }
 

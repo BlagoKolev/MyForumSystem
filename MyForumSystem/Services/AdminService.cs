@@ -1,7 +1,5 @@
 ﻿using MyForumSystem.Areas.Admin.Models.Comments;
 using MyForumSystem.Areas.Admin.Models.Posts;
-using MyForumSystem.Data;
-using MyForumSystem.Models.Posts;
 
 namespace MyForumSystem.Services
 {
@@ -13,7 +11,6 @@ namespace MyForumSystem.Services
         {
             this.db = db;
         }
-
         public async Task ApproveComment(int commentId)
         {
             var commentToApprove = db.Comments
@@ -67,7 +64,6 @@ namespace MyForumSystem.Services
             postToDecline.IsDeleted = true;
             await db.SaveChangesAsync();
         }
-
         public AllCommentsApproveViewModel GetCommentsToApprove()
         {
             var commentsToApprove = db.Comments
@@ -87,7 +83,6 @@ namespace MyForumSystem.Services
                   })
                  .ToList();
             return new AllCommentsApproveViewModel() { comments = commentsToApprove };
-
         }
 
         public AllPostsApproveViewModel GetPostsToApprove()
